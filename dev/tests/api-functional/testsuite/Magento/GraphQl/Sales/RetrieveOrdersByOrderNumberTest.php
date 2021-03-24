@@ -76,7 +76,8 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
             'quantity_ordered'=> 2,
             'product_sku'=> 'simple',
             'product_name'=> 'Simple Product',
-            'product_sale_price'=> ['currency'=> 'USD', 'value'=> 10]
+            'product_sale_price'=> ['currency'=> 'USD', 'value'=> 10],
+            ['product']['sku'] => 'simple'
         ];
         $actualOrderItemsFromResponse = $customerOrderItemsInResponse['items'][0];
         $this->assertEquals($expectedOrderItems, $actualOrderItemsFromResponse);
@@ -1322,6 +1323,10 @@ QUERY;
         product_sku
         product_name
         product_sale_price{currency value}
+        product {
+            sku
+            image {label}
+        }
       }
       total {
              base_grand_total {
